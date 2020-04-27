@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
+import { Usuario } from '../classes/usuario';
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +8,7 @@ import { Socket } from 'ngx-socket-io';
 export class WebsocketsService {
 
   public socketStatus = false;
+  public usuario: Usuario;
 
   constructor(private socket: Socket) {
     this.checkStatus();
@@ -32,6 +34,12 @@ export class WebsocketsService {
 
   listen( evento: string ) {
     return this.socket.fromEvent( evento );
+  }
+
+  loginWS( nombre: string ) {
+    this.emit('configurar-usuario', { nombre }, ( resp ) => {
+      console.log(resp);
+    });
   }
 
 }

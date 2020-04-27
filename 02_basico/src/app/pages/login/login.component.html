@@ -1,0 +1,19 @@
+<div class="login-box">
+    <div class="row justify-content-center">
+        <h1 class="text-center">Bienvenidos al Chat con Node.js y Angular</h1>
+        <div class="col-9 text-center">
+            <form (ngSubmit)="ingresar()" class="p-4">
+                <input type="text" 
+                       name="nombre" 
+                       [(ngModel)]="nombre"
+                       placeholder="Nombre de Usuario"
+                       autofocus
+                       class="form-control">
+                <button [disabled]="nombre.trim().length === 0"
+                        class="btn btn-primary mt-3">
+                    Ingresar
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
