@@ -1,0 +1,26 @@
+<div class="container mb-3">
+    <div class="row">
+      <h1>Chat</h1>
+    </div>
+    <hr>
+
+    <div id="chat-mensajes">
+        <li *ngFor="let msg of mensajes" class="list-group-item">
+            {{ msg.de }}: {{ msg.cuerpo }}
+        </li>
+    </div>
+
+    <div class="form-group">
+      
+      <input type="text" 
+             [(ngModel)]="msg" 
+             (keyup.enter)="enviarMsg()"
+             class="form-control chat-input" 
+             placeholder="Mensaje..." 
+             autofocus 
+             autocomplete="off">
+      <small id="helpId" class="form-text text-muted">Ingrese el mensaje a enviar</small>
+    </div>
+    <button type="button" (click)="enviarMsg()"  class="btn btn-primary" btn-lg btn-block>Enviar Mensaje</button>
+  </div>
+  <br><br>
