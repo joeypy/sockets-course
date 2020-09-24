@@ -1,7 +1,13 @@
-
-<h1>Usuario: 
-    <small>{{ wsService.usuario.nombre | titlecase }}</small>
-</h1>
+<div class="d-flex justify-content-between">
+    <h1>Usuario: 
+        <small>{{ wsService.usuario.nombre | titlecase }}</small>
+    </h1>
+    <div class="mt-3">
+        <button class="btn btn-danger " (click)="salir()">
+            Salir
+        </button>
+    </div>
+</div>
 
 <hr>
 
