@@ -8,15 +8,22 @@ export class ChatService {
 
   constructor(public wsService: WebsocketsService) { }
 
+
   sendMessages( mensaje: string ) {
     const payload = {
-      de: 'Joseph',
+      de: this.wsService.getUsuario().nombre,
       cuerpo: mensaje
     };
     this.wsService.emit('mensaje', payload );
   }
 
+
   getMessages() {
     return this.wsService.listen('mensaje-nuevo');
+  }
+
+
+  getMenssagesprivate(){
+    return this.wsService.listen('mensaje-privado');
   }
 }
