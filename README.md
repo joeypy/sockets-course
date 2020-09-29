@@ -1,6 +1,6 @@
 # Servidor para Sockets
 
-- Demo: [Aquí](https://angular-chat.designio.tech/chat/)
+- Demo: [Aquí](https://angular-chat.designio.tech/)
 
 Reconstruir módulos de Node
 ```
