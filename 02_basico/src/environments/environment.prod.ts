@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  wsUrl: 'https://angular-chat.designio.tech/'
 };
