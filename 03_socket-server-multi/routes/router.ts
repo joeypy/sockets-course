@@ -2,9 +2,13 @@ import { Router, Request, Response } from "express";
 import Server from "../classes/server";
 import { usuariosConectados } from "../sockets/sockets";
 import { GraficaData } from "../classes/grafica";
+import { EncuestaData } from "../classes/encuesta";
 
 const router = Router();
 const grafica = new GraficaData();
+const encuesta = new EncuestaData();
+const server = Server.instance;
+
 
 router.get("/grafica", (req: Request, res: Response) => {
   res.json(grafica.getDataGrafica());
@@ -16,12 +20,27 @@ router.post("/grafica", (req: Request, res: Response) => {
   const unidades = Number(req.body.unidades);
 
   grafica.incrementarValor(mes, unidades);
-
-  const server = Server.instance;
   server.io.emit("cambio-grafica", grafica.getDataGrafica() );
-
   res.json(grafica.getDataGrafica());
 });
+
+
+
+router.get("/encuesta", (req: Request, res: Response) => {
+  res.json(encuesta.getDataEncuesta());
+});
+
+// Envía un mensaje a todos los usuario vi REST
+router.post("/encuesta", (req: Request, res: Response) => {
+  const pregunta: number = req.body.pregunta;
+  const unidades: number = Number(req.body.unidades);
+
+  encuesta.incrementarValor(pregunta, unidades);
+  server.io.emit("cambio-encuesta", encuesta.getDataEncuesta() );
+  res.json(encuesta.getDataEncuesta());
+});
+
+
 
 // Envia un mensaje a un usuario en especifico via REST
 router.post("/mensajes/:id", (req: Request, res: Response) => {
