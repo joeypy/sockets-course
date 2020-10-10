@@ -1,15 +1,17 @@
 import { Router, Request, Response } from "express";
 import Server from "../classes/server";
-import { usuariosConectados } from "../sockets/sockets";
+import { usuariosConectados, mapa } from "../sockets/sockets";
 import { GraficaData } from "../classes/grafica";
 import { EncuestaData } from "../classes/encuesta";
+import { Marcador } from '../classes/marcador';
 
 const router = Router();
 const grafica = new GraficaData();
 const encuesta = new EncuestaData();
+
 const server = Server.instance;
 
-
+// ###########################################################
 router.get("/grafica", (req: Request, res: Response) => {
   res.json(grafica.getDataGrafica());
 });
@@ -25,7 +27,7 @@ router.post("/grafica", (req: Request, res: Response) => {
 });
 
 
-
+// ###########################################################
 router.get("/encuesta", (req: Request, res: Response) => {
   res.json(encuesta.getDataEncuesta());
 });
@@ -40,8 +42,13 @@ router.post("/encuesta", (req: Request, res: Response) => {
   res.json(encuesta.getDataEncuesta());
 });
 
+// ###########################################################
+router.get("/mapa", (req: Request, res: Response) => {
+  res.json( mapa.getMarcadores());
+});
 
 
+// ###########################################################
 // Envia un mensaje a un usuario en especifico via REST
 router.post("/mensajes/:id", (req: Request, res: Response) => {
   const cuerpo = req.body.cuerpo;
